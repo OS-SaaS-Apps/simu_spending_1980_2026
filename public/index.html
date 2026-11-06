@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Budget 1980 vs 2026</title>
+  <meta name="description" content="Le budget public de la France en 1980 et en 2026, ramené en euros constants par Français.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <p class="eyebrow">État + Sécurité sociale + collectivités locales</p>
+      <h1>Le budget de la France&nbsp;: <span class="y80">1980</span> face à <span class="y26">2026</span></h1>
+      <p class="lede" id="lede">Chargement des données…</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section aria-labelledby="t-cards" class="cards-section">
+      <h2 id="t-cards" class="sr-only">Les trois budgets</h2>
+      <div class="cards" id="cards"></div>
+      <p class="note" id="cards-note"></p>
+    </section>
+
+    <section aria-labelledby="t-detail" class="detail">
+      <div class="detail-head">
+        <h2 id="t-detail">Où va l'argent&nbsp;?</h2>
+        <p class="sub" id="detail-sub"></p>
+      </div>
+
+      <div class="controls" role="toolbar" aria-label="Options d'affichage">
+        <div class="seg" role="radiogroup" aria-label="Dépenses ou recettes" data-key="side">
+          <button role="radio" data-v="dep">Dépenses</button>
+          <button role="radio" data-v="rec">Recettes</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Unité" data-key="unit">
+          <button role="radio" data-v="capita">Par Français</button>
+          <button role="radio" data-v="total">Total</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Euros" data-key="money">
+          <button role="radio" data-v="const" title="Corrigé de l'inflation : en euros de 2026">€ de 2026</button>
+          <button role="radio" data-v="cur" title="Montants de l'époque, sans correction de l'inflation">€ de l'époque</button>
+        </div>
+        <label class="sort">Trier
+          <select id="sort">
+            <option value="v26">par montant 2026</option>
+            <option value="gap">par écart</option>
+            <option value="alpha">par nom</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="legend" id="legend"></div>
+      <div class="chart" id="chart" role="list"></div>
+
+      <div class="table-toggle">
+        <button class="link" id="btn-table" aria-expanded="false">Voir sous forme de tableau</button>
+      </div>
+      <div id="table-wrap" hidden></div>
+    </section>
+
+    <section aria-labelledby="t-sauce" class="detail sauce">
+      <div class="detail-head">
+        <h2 id="t-sauce">Et si 2026 suivait les règles de 1980&nbsp;?</h2>
+        <p class="sub">Le budget de 1980, en euros constants, appliqué à la France de 2026&nbsp;: même montant par Français, par élève, par étudiant, par chômeur ou par enfant, et des retraites qui gardent le même effort par cotisant. Les recettes suivent le nombre de personnes en emploi.</p>
+      </div>
+      <div class="controls" role="toolbar" aria-label="Options d'affichage du scénario">
+        <div class="seg" role="radiogroup" aria-label="Dépenses ou recettes" data-key="sSide">
+          <button role="radio" data-v="dep">Dépenses</button>
+          <button role="radio" data-v="rec">Recettes</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Unité" data-key="sUnit">
+          <button role="radio" data-v="capita">Par Français</button>
+          <button role="radio" data-v="total">Total</button>
+        </div>
+      </div>
+      <div class="skpis" id="sauce-kpis"></div>
+      <div class="legend"><span><i style="--k:var(--csa)"></i>2026 à la sauce 1980</span><span><i style="--k:var(--c26)"></i>2026 réel</span><span class="hint">En € de 2026. La règle appliquée figure sous chaque poste.</span></div>
+      <div class="chart" id="sauce-chart" role="list"></div>
+    </section>
+
+    <section aria-labelledby="t-game" class="detail game">
+      <div class="detail-head">
+        <h2 id="t-game">À vous de jouer&nbsp;: faites votre budget</h2>
+        <p class="sub">Partez de 2026 à la sauce 1980 et déplacez les curseurs pour augmenter ou baisser chaque dépense et chaque recette. Le budget total et le déficit se mettent à jour.</p>
+      </div>
+      <div class="controls" role="toolbar" aria-label="Options du jeu">
+        <div class="seg" role="radiogroup" aria-label="Dépenses ou recettes" data-key="gSide">
+          <button role="radio" data-v="dep">Dépenses</button>
+          <button role="radio" data-v="rec">Recettes</button>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Unité" data-key="gUnit">
+          <button role="radio" data-v="capita">Par Français</button>
+          <button role="radio" data-v="total">Total</button>
+        </div>
+        <div class="gbtns">
+          <button class="btn" id="game-reset">Repartir de la sauce 1980</button>
+          <button class="btn" id="game-2026">Appliquer 2026 réel</button>
+        </div>
+      </div>
+      <div class="gbar" id="game-kpis"></div>
+      <div class="legend"><span><i style="--k:var(--cje)"></i>Votre budget</span><span><i style="--k:var(--csa)"></i>2026 à la sauce 1980</span><span><i style="--k:var(--c26)"></i>2026 réel</span><span class="hint">En € de 2026. Sur chaque curseur, les repères montrent la sauce 1980 et 2026 réel.</span></div>
+      <div class="chart" id="game-chart" role="list"></div>
+      <div class="gresult">
+        <h3>Résultat&nbsp;: de 2026 à votre budget</h3>
+        <div id="game-result"></div>
+      </div>
+      <div class="gexport">
+        <p>Emportez votre budget et la liste de vos choix&nbsp;:</p>
+        <button class="btn" id="game-pdf">Rapport PDF</button>
+        <button class="btn" id="game-xlsx">Rapport Excel</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-ctx" class="context">
+      <h2 id="t-ctx">Pour remettre en perspective</h2>
+      <div class="ctx-grid" id="ctx"></div>
+    </section>
+
+    <section aria-labelledby="t-ind" class="context">
+      <h2 id="t-ind">Indicateurs transversaux</h2>
+      <p class="note">L'État, la Sécurité sociale et les collectivités vus par leurs effectifs et leurs retraités. Les valeurs 1980 marquées <span class="est">estimation</span> sont reconstituées.</p>
+      <div class="ctx-grid" id="ind"></div>
+    </section>
+
+    <section aria-labelledby="t-src" class="sources">
+      <h2 id="t-src">Sources et méthode</h2>
+      <div id="method"></div>
+      <p class="downloads">Les données sont modifiables dans les fichiers Excel&nbsp;:
+        <a id="dl80" href="#" download>budget_1980.xlsx</a> ·
+        <a id="dl26" href="#" download>budget_2026.xlsx</a></p>
+    </section>
+  </main>
+
+  <footer class="foot wrap">
+    <p>Montants en euros constants 2026 (corrigés de l'inflation) sauf mention contraire. « Par Français » : divisé par le nombre de personnes de nationalité française.</p>
+  </footer>
+
+  <div class="tooltip" id="tip" role="tooltip" hidden></div>
+  <div id="report" hidden></div>
+
+  <dialog id="dlg" aria-labelledby="dlg-title">
+    <form method="dialog" class="dlg-close"><button aria-label="Fermer">✕</button></form>
+    <div id="dlg-body"></div>
+  </dialog>
+</body>
+</html>
