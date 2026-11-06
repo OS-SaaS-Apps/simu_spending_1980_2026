@@ -1,6 +1,6 @@
 # Questions et tâches en cours
 
-Mise à jour : 31 octobre 2026. Contexte dans [PROJET.md](PROJET.md).
+Mise à jour : 6 novembre 2026. Contexte dans [PROJET.md](PROJET.md).
 
 ## Questions à trancher
 
@@ -25,6 +25,7 @@ Mise à jour : 31 octobre 2026. Contexte dans [PROJET.md](PROJET.md).
 ## À faire
 
 - [ ] Mettre à jour 2026 avec les comptes COFOG définitifs de l'Insee, attendus en 2027.
-- [ ] Mettre le site en ligne et choisir l'hébergement ; régler `DATA_URLS` si les Excel changent d'adresse.
+- [x] Mettre le site en ligne : GitHub Pages, https://os-saas-apps.github.io/simu_spending_1980_2026/ (6 novembre 2026).
+- [ ] Choisir si l'on garde l'adresse github.io ou un nom de domaine à soi.
 - [ ] Reporter dans `tools/build_data.py` toute correction manuelle des Excel avant de le relancer.
 - [ ] Tester le rapport PDF dans une vraie fenêtre d'impression, sur Chrome, Firefox, Safari et sur téléphone. Il n'a été testé qu'en impression simulée sous Chromium.

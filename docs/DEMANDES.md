@@ -64,3 +64,14 @@ Demandes de l'utilisateur, dans l'ordre, telles qu'écrites. Les décisions qui 
 ## 2026-11-01
 
 - pour la categorie education nationale je pense a passer les bar graph en € / eleve a cause de l'augmentation de la population francaise mais la diminution du nombre d'eleves
+- on est d'accord que tu as integrer le budget pour le aesh dans la sauce 1980?
+
+## 2026-11-06
+
+- I plan to add this project to github - look at the currrent folder and organize the files according to best practices. Add a readme and a .gitignore
+- look for api keys and passwords - report any finding
+- this is a one shot project - it is probably not reusable - which licence should I use? (choix : MIT, au nom de OS-SaaS-Apps)
+- ok the target is https://github.com/OS-SaaS-Apps/simu_spending_1980_2026.git
+- change to OS-SaaS-Apps (auteur des commits, adresse noreply GitHub)
+- is there a way to "host" this project on github? like with pages? → oui
+- make sure the task list is updated and write in the project memory md file what we did last

@@ -25,7 +25,8 @@ Public visé : grand public, sur ordinateur, tablette et téléphone. La qualit�
 - Fichiers : `public/index.html`, `public/app.js`, `public/styles.css`, `public/data/budget_1980.xlsx`, `public/data/budget_2026.xlsx`.
 - `server.py` : serveur de test local, port 8080, sans cache.
 - `tools/build_data.py` : a généré les Excel. Le relancer écrase les corrections faites à la main.
-- Dépôt git, destiné à GitHub.
+- Dépôt : https://github.com/OS-SaaS-Apps/simu_spending_1980_2026 (public, licence MIT, auteur OS-SaaS-Apps).
+- En ligne : https://os-saas-apps.github.io/simu_spending_1980_2026/. Chaque push sur `main` republie `public/` (`.github/workflows/pages.yml`).
 - Couleurs : 1980 bleu, 2026 orange, transposé vert d'eau, sauce 1980 jaune, votre budget violet.
 
 ## Décisions de périmètre
