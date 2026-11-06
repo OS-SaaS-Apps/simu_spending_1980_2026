@@ -4,6 +4,8 @@ Site web qui compare le budget public de la France (État, Sécurité sociale, c
 
 Point de repère pour la présidentielle de 2027 : un budget 1980 quasi équilibré face au déficit actuel.
 
+**En ligne : https://os-saas-apps.github.io/simu_spending_1980_2026/**
+
 ## Lancer en local
 
 Il faut Python 3.
@@ -12,7 +14,7 @@ Il faut Python 3.
 python server.py        # puis ouvrir http://localhost:8080
 ```
 
-Le site est statique : n'importe quel serveur web qui sert le dossier `public/` suffit (GitHub Pages, Netlify, etc.). Ouvrir `index.html` directement depuis le disque ne marche pas, car le navigateur bloque la lecture des Excel.
+Le site est statique : n'importe quel serveur web qui sert le dossier `public/` suffit. Chaque push sur `main` le publie sur GitHub Pages (`.github/workflows/pages.yml`). Ouvrir `index.html` directement depuis le disque ne marche pas, car le navigateur bloque la lecture des Excel.
 
 ## Arborescence
 
